@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      th:replace="~{/layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},
+                                                ~{:: #home-footer}
+                                               )}">
+<head>
+    <title>Homepage</title>
+    <th:block id="home-static-resources">
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}"/>
+    </th:block>
+</head>
+<body>
+<!--header-->
+<div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+
+<!--navbar-->
+<div id="home-nav" th:replace="~{/fragments/navbar :: nav-admin}"></div>
+
+<!--footer-->
+<div id="home-footer" th:replace="~{/fragments/app-fragments :: footer}">
+    Footer
+</div>
+</body>
+</html>

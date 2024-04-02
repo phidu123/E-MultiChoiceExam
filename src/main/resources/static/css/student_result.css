@@ -1,0 +1,44 @@
+#search_bar{
+    margin-top: 70px;
+}
+#result_section div.col-4{
+    max-width: 300px !important;
+    margin: 20px 35px 0px 35px;
+}
+td.in4{
+    text-align: center;
+}
+
+#result_section div.row{
+    display: flex;
+}
+
+#result_section div.card{
+    width: 500px;
+    /* margin-top: 20px; */
+}
+
+#result_section div.card-header{
+    text-align: center;
+    text-transform: uppercase;
+    background-color: rgba(152, 93, 255, 1);
+    color: white;
+    font-size: 20px;
+    text-shadow: 1px 1px 0 whitesmoke;
+    /* font-weight: bold; */
+}
+
+#result_section div.card-body .card-title{
+    text-transform: capitalize;
+    text-align: center;
+    color: red;
+    text-shadow: 1px 1px 0 crimson;
+}
+
+#result_section div.card-body a.details{
+    margin-right: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(255, 170, 136, 1);
+}

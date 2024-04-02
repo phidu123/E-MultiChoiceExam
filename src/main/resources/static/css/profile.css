@@ -1,0 +1,57 @@
+.card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.card-nav-tabs {
+    border-top: none !important;
+}
+
+.nav-tabs a, .nav-tabs a:hover, .nav-tabs a:focus {
+    color: #AA2906 !important;
+    display: block;
+    text-decoration: none !important;
+}
+
+i.font-style {
+    font-size: 40px;
+    margin: 5px;
+}
+
+.nav-tabs {
+    border-bottom: none !important;
+}
+
+.nav-tabs > li.active > a {
+    color: var(--main-bg-color) !important;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+
+#semester {
+	min-width: 150px;
+	background-color: var(--main-bg-color);
+	padding: 10px 25px;
+	padding-right: 35px;
+	color: #fff;
+	font-size: 20px;
+	position: absolute;
+	left: 40px;
+	top: 40px;
+	font-weight: bold;
+	box-shadow: -5px 5px 10px #bbb;
+}
+
+#semester:before {
+	content: "";
+	border: 20px solid;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	border-color: transparent #fff transparent transparent;
+	transform: translateY(-50%);
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      th:replace="~{/layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},
+                                                ~{:: #home-footer}
+                                               )}">
+<head>
+    <title>EXAM LIST</title>
+    <th:block id="home-static-resources">
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/list-student.css}"/>
+    </th:block>
+</head>
+<body>
+<div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+<div id="home-nav" th:replace="~{/fragments/navbar :: nav-admin}"></div>
+<div id="home-main-content" class="portlet-box p-3">
+    <div class="table-responsive">
+        <h2 class="text-center mt-4">EXAM LIST</h2>
+        <form style="display:flex" method="get" action="/admin/list-exam/filter">
+            <div>
+                <p style="color:black">Subject:&emsp;</p>
+            </div>
+            <div>
+                <select class="custom-select" name="subject">
+                    <option>All</option>
+                    <span th:each="sub : ${subject}">
+                    <option th:text="${sub.name}" th:if="${choSubject == sub.name}" th:value="${sub.name}" selected></option>
+                    <option th:text="${sub.name}" th:unless="${choSubject == sub.name}" th:value="${sub.name}"></option>
+                </span>
+                </select>
+            </div>&emsp;
+            <button class="btn btn-outline-info" type="submit">Search</button>
+        </form>
+
+        <br>
+        <table class="table" id="examlist">
+            <th class="student-header-table pt-2">N.o</th>
+            <th class="student-header-table pt-2">ID Student</th>
+            <th class="student-header-table pt-2">Name</th>
+            <th class="student-header-table pt-2">Subject</th>
+            <tr th:each="s, start: ${st}">
+                <td class="student-header-table pt-2" th:text="${start.index + 1}"></td>
+                <td class="student-id pt-2" th:text="${s.student.id}"></td>
+                <td class="student-id pt-2" th:text="${s.student.name}"></td>
+                <td class="student-id pt-2" th:text="${s.subject.name}"></td>
+            </tr>
+        </table>
+        <a th:href="@{/admin/list-exam/export-csv}"><button class="btn btn-primary">Export File</button></a><br><br>
+    </div>
+</div>
+<div id="home-footer" th:replace="~{/fragments/app-fragments :: footer}">
+    Footer
+</div>
+</body>
+</html>

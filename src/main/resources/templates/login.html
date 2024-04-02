@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link type="text/css" th:href="@{/css/mainLayout.css}" rel="stylesheet" />
+    <link type="text/css" th:href="@{/css/login.css}" rel="stylesheet" />
+    <link type="text/css" th:href="@{/css/home.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+</head>
+<body>
+    <div id="login-page">
+        <div th:if="${flashMessage}" th:class="${'flash ' + flashType}" id="flashMessage">
+            <div th:class="${'flash__icon ' + flashType}">
+                <i th:if="${flashType == 'failed'}" class="icon fa fa-times-circle-o"></i>
+                <i th:if="${flashType == 'success'}" class="icon fa fa-check"></i>
+            </div>
+            <p th:text="${flashMessage}"></p>
+        </div>
+        <div class="main-content w-100 m-0">
+            <div class="login-container">
+                <div class="wrap-login d-flex flex-wrap justify-content-between">
+                    <div class="col-sm-6 col-lg-5 wrap-login__img-container">
+                        <img class="wrap-login__img" src="/images/login.webp" alt="Login image">
+                    </div>
+                    <div class="col-sm-6 col-lg-7 wrap-login__main">
+                        <form id="login" action="/login" method="post" class="wrap-login__form pr-2">
+                            <div class="wrap-login__form-header sfont">
+                                <h2 style="text-align: center; width: 100%; color: var(--main-bg-color)">
+                                    <b>Welcome back!</b>
+                                </h2>
+                            </div>
+                            <div class="col-md-12 py-2">
+                                <label for="inputEmailSignIn" class="form-label sign-form-label">Email</label>
+                                <input required name="email" class="form-control" id="inputEmailSignIn" autofocus>
+                            </div>
+                            <div class="col-md-12 py-2">
+                                <label for="inputPasswordSignIn" class="form-label sign-form-label">
+                                        <span class="row d-flex align-items-center">
+                                            <span class="col-12">Password</span>
+                                        </span>
+                                </label>
+                                <input required type="password" name="password" class="form-control demo-show-password" id="inputPasswordSignIn" style="background-image: url('/images/hide-password.webp');">
+                            </div>
+                            <p th:if="${failedMessage}" class="error" th:text="${failedMessage}"></p>
+                            <div class="w100 d-flex flex-wrap justify-content-center pt-2">
+                                <button type="submit" name="login" class="wrap-login__form-btn d-flex justify-content-center align-items-center" id="btnLogin"> <b>Log in</b> </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

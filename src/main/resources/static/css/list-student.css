@@ -1,0 +1,123 @@
+.portlet-box {
+    background-color: #fff;
+    min-height: 300px;
+}
+
+.student-table {
+    width:100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.student-header-table {
+    text-align: center;
+    padding: 8px;
+    font-weight: 600;
+}
+
+.student-id {
+    font-weight: 300;
+    text-align: center;
+}
+
+.student-name {
+    font-weight: 300;
+    text-align: center;
+}
+
+.student-action {
+    font-weight: 300;
+    text-align: center;
+}
+
+.student-action-button {
+    background-color: dodgerblue;
+    border: none;
+    font-size: 16px;
+    font-weight: 300;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    padding: 10px 15px;
+}
+
+.student-action-button:hover {
+    background-color: skyblue;
+}
+
+.student-action-button:focus, student-action-button:focus.active {
+    outline: none;
+}
+
+.save-button {
+    margin-top: 15px;
+    margin-left: 82%;
+    background-color: limegreen;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    font-weight: 300;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 25px;
+}
+
+.save-button:hover {
+    background-color: lightgreen;
+}
+
+.background-round-button {
+    background_color: #fff;
+}
+
+.save-button:focus, save-button:focus.active {
+    outline: none;
+}
+
+.content-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr {
+    background-color: var(--main-bg-color);
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+}
+
+.content-table th,
+.content-table td {
+    padding: 12px 10px;
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+    background-color: #f8f8f8;
+}
+
+.content-table tbody tr:last-of-type,
+.tbody {
+    border-bottom: 2px solid var(--main-bg-color);
+}
+
+.content-table tbody tr:nth-child(2n) {
+    font-weight: bold;
+    color: var(--main-bg-color);
+}
+
+.content-table tbody tr:hover {
+    cursor: pointer;
+}
+
+.actions .btn {
+    padding: 2px 4px;
+}

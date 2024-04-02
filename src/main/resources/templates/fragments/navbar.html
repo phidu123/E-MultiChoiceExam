@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Nav bar</title>
+</head>
+<body>
+<!-- Student Navigator -->
+<ul th:fragment="nav-student">
+    <li class="pb-2"> <img th:src="@{/images/student-space.jpg}" width="100%"> </li>
+    <li><a class="inactive-link" th:href="@{/}">Home</a></li>
+    <li><a class="inactive-link" th:href="@{/student/exam_enroll}">Exam Enroll</a></li>
+    <li><a class="inactive-link" th:href="@{/student/schedule}">Exam Schedule</a></li>
+    <li><a class="inactive-link" th:href="@{/student/results}">Exam Result</a></li>
+    <li><a class="inactive-link" th:href="@{/student/reports}">Exam Report</a></li>
+    <li><a class="inactive-link" th:href="@{/student/update_info}">Change Student Info</a></li>
+</ul>
+<!-- Teacher Navigator -->
+<ul th:fragment = "nav-teacher">
+    <li class="pb-2"> <img th:src="@{/images/teacher-space.png}" width="100%"> </li>
+    <li><a class="inactive-link" th:href="@{/}">Home</a></li>
+    <li><a class="inactive-link" th:href="@{/class}">My Classes</a></li>
+    <li><a class="inactive-link" th:href="@{/bank}">Bank Exam</a></li>
+    <li><a class="inactive-link" th:href="@{/report}">Report Handling</a></li>
+</ul>
+
+<!-- Admin Navigator -->
+    <ul th:fragment = "nav-admin">
+        <li class="pb-2"> <img th:src="@{/images/admin-space.webp}" width="100%"> </li>
+        <li><a class="inactive-link" th:href="@{/admin}">Home</a></li>
+        <li><a class="inactive-link" th:href="@{/admin/user-management}">User Management</a></li>
+        <li><a class="inactive-link" th:href="@{/admin/reset-password}">Reset Password</a></li>
+        <li><a class="inactive-link" th:href="@{/admin/plans-exam}">Plan Exam</a></li>
+        <li><a class="inactive-link" th:href="@{/admin/list-exam}">Exam List</a></li>
+    </ul>
+
+</body>
+</html>

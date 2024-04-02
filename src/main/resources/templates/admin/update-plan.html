@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      th:replace="~{/layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},
+                                                ~{:: #home-footer}
+                                               )}">
+<head>
+    <title>UPDATE PLAN</title>
+    <th:block id="home-static-resources">
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/paper.css}"/>
+    </th:block>
+</head>
+<body>
+<div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+<div id="home-nav" th:replace="~{/fragments/navbar :: nav-admin}"></div>
+
+<div id="home-main-content"  class="portlet-box p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center mt-4">Update Plan</h2>
+                <form th:action="@{/admin/update-plan/} + ${exam.id}" method="post" th:object="${exam}" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" name="name" required th:value="${exam.name}">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Exam Date:</label>
+                        <input type="datetime-local" class="form-control" id="date" aria-describedby="emailHelp" name="date" required th:value="${exam.examDate}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+.login-page {
+	width: 100%;
+}
+
+.login-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--sub-bg-color);
+}
+
+.wrap-login,
+.wrap-signin {
+    width: 1000px;
+    height: 450px;
+    border-radius: 10px;
+    box-shadow:  9px 10px 8px -5px rgb(0 0 0 / 75%);
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.wrap-signin {
+    height: 520px;
+}
+
+
+.wrap-login__img {
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin-left: -15px;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.wrap-login__form {
+    padding-top: 4rem;
+    padding-bottom: 4rem
+}
+
+.wrap-signin__form {
+    padding-top: 2rem;
+    padding-bottom: 2rem
+}
+
+.wrap-login__form-btn {
+    font-size: 1.2rem;
+    color: #fff;
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--main-bg-color);
+    margin-top: 20px;
+}
+
+.wrap-login__form-btn--outline {
+    font-size: 1.2rem;
+    color: var(--main-bg-color);
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid var(--main-bg-color);
+    background-color: #fff;
+    margin-top: 20px;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.wrap-login__form-btn:hover {
+    background-color: rgb(40, 85, 190);
+}

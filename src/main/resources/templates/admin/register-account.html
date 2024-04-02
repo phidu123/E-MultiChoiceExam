@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      th:replace="~{/layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},
+                                                ~{:: #home-footer}
+                                               )}">
+<head>
+    <title>ADD USER</title>
+    <th:block id="home-static-resources">
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/paper.css}"/>
+    </th:block>
+</head>
+<body>
+<div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+<div id="home-nav" th:replace="~{/fragments/navbar :: nav-admin}"></div>
+
+<div id="home-main-content"  class="portlet-box p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Add User</h2>
+                <form th:action="@{/admin/register-account}" method="post" th:object="${account}" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="text" class="form-control" id="email" aria-describedby="emailHelp" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" aria-describedby="emailHelp" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" class="form-control" id="address" aria-describedby="emailHelp" name="address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="workplace">Workplace:</label>
+                        <input type="text" class="form-control" id="workplace" aria-describedby="emailHelp" name="workplace" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input type="tel" class="form-control" id="phone" aria-describedby="emailHelp" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="birth">Date of Birth:</label>
+                        <input type="date" class="form-control" id="birth" aria-describedby="emailHelp" name="birth" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Avatar:</label>
+                        <input type="file" class="form-control-file"  onchange="readURL(this);" id="image" name="image" accept="image/png, image/jpeg" required>
+                        <img id="blah" src="http://placehold.it/180" alt="your image" />
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role:</label>
+                        <select class="form-control" id="role" name="role" required>
+                            <option value="teacher">Teacher</option>
+                            <option value="student">Student</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="home-footer" th:replace="~{/fragments/app-fragments :: footer}">
+    Footer
+</div>
+<script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('#blah').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+</script>
+</body>
+</html>

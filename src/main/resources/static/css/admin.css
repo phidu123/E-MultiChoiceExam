@@ -1,0 +1,79 @@
+nav {
+    float: left;
+    width: 25%;
+    min-height: 500px;
+}
+
+article {
+    float: left;
+    padding: 20px;
+    width: 75%;
+    background-color: #f8f8f8;
+    min-height: 500px;
+}
+
+section {
+	background-color: var(--sub-bg-color);
+	margin-bottom: 40px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+section:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+@media ( max-width : 600px) {
+    nav, article {
+        width: 100%;
+        height: auto;
+    }
+}
+
+#home-nav > ul > li:not(:first-child) {
+	padding: 10px;
+	color: #fff;
+	border-top: 1px solid #eee;
+	position: relative;
+}
+
+#home-nav > ul > li:not(:first-child):not(.active):hover {
+	background: var(--sub-bg-color);
+}
+
+#home-nav > ul > li:last-child {
+	border-bottom: 1px solid #eee;
+}
+
+#home-nav > ul > li:not(:first-child) a {
+	display: block;
+	width: 100%;
+}
+
+#home-nav > ul > li:not(:first-child).active {
+	font-weight: bold;
+	background: var(--list-item-nav);
+	border-top: 0px;
+}
+
+#home-nav > ul > li:not(:first-child).active a {
+	color: #fff;
+}
+
+#home-nav > ul > li:not(:first-child).active::after {
+	content: "";
+	border: 10px solid;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	border-color: transparent #f8f8f8 transparent transparent;
+	transform: translateY(-50%);
+}

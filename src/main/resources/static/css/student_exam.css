@@ -1,0 +1,78 @@
+#exam_section{
+    padding: 20px;
+}
+#q_section{
+    margin: 20px 10px 0px 40px;
+    padding: 50px;
+}
+#exam_sidebar{
+    margin: 10px;
+}
+
+#sidebar{
+    position: fixed;
+    right: 0;
+    margin-right: 40px;
+}
+.q{
+    margin: 10px 15px 10px 15px;
+    width: 60px;
+    height: 55px;
+}
+#sidebar{
+    margin-top: 20px;
+    margin-left: 40px;
+    height: fit-content;
+}
+#exam_header{
+    height: 70px;
+    background-color: lightblue;
+}
+.timer{
+    margin-top: 10px;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+.sub-timer{
+    background-color: cornflowerblue;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+#question{
+    min-height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.answer{
+    margin-top: 30px;
+}
+.answer_content{
+    max-width: 370px;
+    min-height: 70px;
+    display: flex;
+    justify-content: center;
+}
+.a{
+    font-size: 20px;
+}
+
+#q_section tr th{
+    font-size: 18px;
+    padding-bottom: 10px;
+}
+
+#exam_sidebar .row button{
+    font-weight: bold;
+}
+
+#dashboard{
+    width: 25%;
+}
+.question{
+    font-size: 20px;
+}

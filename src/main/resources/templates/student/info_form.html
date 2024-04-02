@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #info_layout},
+                                                ~{:: #home-footer}
+                                               )}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information</title>
+
+    <th:block id="home-static-resources">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+        <link rel="stylesheet" th:href="@{/css/student_home.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+    </th:block>
+
+</head>
+
+<body>
+<!-- Header -->
+<div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+
+<!-- Navigator -->
+<div id="home-nav" th:replace="~{/fragments/navbar :: nav-student}"></div>
+
+<div th:fragment = "info_layout" id ="info_layout">
+    <div class="text-center">
+        <img width="200px" style="border-radius: 50%" class="img-fluid img-circle" src="/resources/default-avatar.jpg">
+        <h3 style="color: var(--main-bg-color)" th:text="${name}" class="pt-3 text-bold"></h3>
+    </div>
+
+    <!--    Information card-->
+
+    <form method = "post">
+        <div class="section section-tabs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="nav-tabs">
+                            <!-- Tabs with icons on Card -->
+                            <div class="card card-nav-tabs w-100">
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a onclick="renderTab(event, this)" href="#about" class="py-2 px-3 mr-5" data-toggle="tab">
+                                            <i class='font-style fas fa-grin-alt'></i>
+                                            About
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a onclick="renderTab(event, this)" class="py-2 px-3 mr-5" href="#contact" data-toggle="tab">
+                                            <i class="font-style fa fa-address-book" aria-hidden="true"></i>
+                                            Contact
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a onclick="renderTab(event, this)" class="py-2 px-3 mr-5" href="#academic" data-toggle="tab">
+                                            <i class="font-style fa-solid fa-book"></i>
+                                            Academic
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="about">
+                                        <table class="table" width="80px" align="center">
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-right">Full Name:</td>
+                                                <td>
+                                                    <input style="form-control text-align:left;" th:value ="${name}" name = "studentName">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right">Date of Birth:</td>
+                                                <td>
+                                                    <input style="form-control text-align:left;" th:value ="${dob}" name = "DoB">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right">Address:</td>
+                                                <td>
+                                                    <input style="form-control text-align:left;" th:value ="${address}" name = "address">
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane" id="contact">
+                                        <table class="table" width="80px" align="center">
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-right">Email:</td>
+                                                <td>
+                                                    <input style="form-control text-align:left;" th:value ="${email}" name = "email">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right">Phone:</td>
+                                                <td>
+                                                    <input style="form-control text-align:left;" th:value ="${phone}" name = "phone">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right">Workplace:</td>
+                                                <td>
+                                                    <input style="form-control text-align:left;" th:value ="${workplace}" name = "workplace">
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane" id="academic">
+                                        <table class="table" width="80px" align="center">
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-right">Major:</td>
+                                                <td>
+                                                    <input style="form-control text-align:left;" th:value ="${major}" name = "major">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right">Enrollment Year:</td>
+                                                <td>
+                                                    <input style="form-control text-align:left;" th:value ="${enrollment_year}" name = "enrollment_year">
+
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class = "row" style="margin-top:20px;">
+                    <div class = "col d-flex justify-content-end">
+                        <button type ="submit" class = "btn btn-success">Update</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--Footer -->
+<div id="home-footer" th:replace="~{/fragments/app-fragments :: footer}">
+    Footer
+</div>
+</body>
+
+</html>

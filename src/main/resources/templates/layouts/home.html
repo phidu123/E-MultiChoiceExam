@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--  main-fragment (title, otherStaticResources, header, nav, mainContent, footer)  -->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},
+                                                ~{:: #home-footer}
+                                               )}">
+
+<head>
+    <title>Homepage</title>
+    <th:block id="home-static-resources">
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+    </th:block>
+</head>
+<body>
+
+<!-- Header -->
+<div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+
+<!-- Navigator -->
+<div id="home-nav" th:replace="~{/fragments/navbar :: 'nav-' + ${role}}"></div>
+
+<!-- Main content by each role -->
+<div id="home-main-content" th:replace="~{'/' + ${role} + '/home'}"></div>
+
+<!--Footer -->
+<div id="home-footer" th:replace="~{/fragments/app-fragments :: footer}">
+    Footer
+</div>
+
+</body>
+</html>

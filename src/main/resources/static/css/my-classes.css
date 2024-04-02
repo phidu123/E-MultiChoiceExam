@@ -1,0 +1,42 @@
+.portlet-box {
+	background-color: #fff;
+	min-height: 500px;
+}
+
+.classroom {
+	box-shadow: 4px 4px 7px rgb(0 0 0 / 0.2);
+	padding: 0;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.classroom-banner {
+	color: #000000;
+	width: 100%;
+	height: 50px;
+	background-color: var(--sub-bg-color);
+	border-top-left-radius: inherit;
+	border-top-right-radius: inherit;
+	text-align: center;
+	line-height: 50px;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.classroom-name {
+	color: #000000;
+	font-weight: 600;
+	width: 100%;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 65px;
+}
+
+.classroom-student {
+	color: #777;
+}

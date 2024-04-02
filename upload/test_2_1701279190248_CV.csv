@@ -1,0 +1,10 @@
+What is a Convolutional Neural Network (CNN) commonly used for in computer vision?,Image Classification,Object Detection,Text Recognition,Speech Synthesis,2
+Which layer in a neural network is responsible for reducing the spatial dimensions of the input?,Pooling Layer,Activation Layer,Normalization Layer,Fully Connected Layer,1
+What is Transfer Learning in the context of computer vision?,Using a pre-trained model on a new task,Transferring data between computers,Changing the learning rate during training,Applying filters to an image,1
+"In computer vision,  what is the purpose of the activation function in a neural network?",Introduce non-linearity into the model,Normalize input data,Compute the loss function,Regularize the weights,1
+What is the primary advantage of using a pre-trained model in computer vision?,Requires less computational resources,Faster convergence during training,Guarantees better accuracy,Reduces the need for labeled data,2
+Which loss function is commonly used for binary classification tasks in computer vision?,Binary Cross-Entropy Loss,Hinge Loss,Mean Squared Error,Huber Loss,1
+What is the purpose of data augmentation in computer vision?,Increase the diversity of the training dataset,Reduce overfitting during training,Improve model interpretability,Speed up the training process,1
+What is the role of the softmax activation function in the output layer of a classification model?,Convert raw scores into probabilities,Compute the gradient during backpropagation,Regularize the weights,Apply dropout to the output,1
+"In object detection,  what does Intersection over Union (IoU) measure?",Overlap between predicted and ground truth bounding boxes,Ratio of positive to negative samples,Quality of feature maps,Confidence score of predictions,1
+What is the function of the RoI (Region of Interest) pooling layer in object detection models?,Extract fixed-size features from variable-sized regions,Compute the gradient during backpropagation,Normalize input data,Apply non-linearity to the output,1

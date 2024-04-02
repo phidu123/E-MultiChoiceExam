@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:fragment="main-fragment (title, otherStaticResources, header, nav, mainContent, footer)">
+<head>
+    <meta charset="UTF-8" />
+    <title th:replace="${title}">Page 1 Title</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>      
+
+    <link type="text/css" th:href="@{/css/mainLayout.css}" rel="stylesheet" />
+    <link rel="shortcut icon" th:href="@{/images/logo.png}">
+    <th:block th:replace="${otherStaticResources} ?: ~{}"></th:block>
+</head>
+<body>
+<!--Header section-->
+    <header th:insert="${header} ?: ~{}">
+        <h2>Header section</h2>
+    </header>
+
+<!--Page content section-->
+    <section>
+        <!-- Navigation -->
+        <nav id="home-nav" th:insert="${nav} ?: ~{}">
+            <ul>
+                <li><a href="#">Page 1</a></li>
+                <li><a href="#">Page 2</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main content -->
+        <article th:insert="${mainContent} ?: ~{}">
+            <h1>Page 1</h1>
+            <p>Main content of Page 1</p>
+        </article>
+    </section>
+
+<!--Footer section-->
+    <footer th:insert="${footer} ?: ~{}">
+        Footer section
+    </footer>
+</body>
+</html>

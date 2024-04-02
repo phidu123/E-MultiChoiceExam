@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main-layout}">
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #student_report_form},
+                                                ~{:: #home-footer}
+                                               )}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report</title>
+
+    <th:block id="home-static-resources">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+        <link rel="stylesheet" th:href="@{/css/student_report.css}">
+    </th:block>
+</head>
+
+<body>
+<!-- Header -->
+<div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+
+<!-- Navigator -->
+<div id="home-nav" th:replace="~{/fragments/navbar :: nav-student}"></div>
+
+<!--Main Content-->
+<div th:fragment = "student_report" id = "student_report_form">
+    <form th:if="${examPaperId}" method ="post">
+        <div class="form-group">
+            <label for="exam_name">Exam Name</label>
+            <input type="text" class="form-control" id="exam_name" th:value = "${examTitle}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="subject_name">Subject Name</label>
+            <input type="text" class="form-control" id="subject_name" th:value = "${subjectName}" disabled>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" name="description" rows="3"></textarea>
+        </div>
+        <div class="form-group d-flex justify-content-end">
+            <button type="submit" class ="btn btn-success">SUBMIT</button>
+          </div>
+      </form>
+</div>
+
+
+<!--Footer -->
+<div id="home-footer" th:replace="~{/fragments/app-fragments :: footer}">
+    Footer
+</div>
+</body>
+</html>

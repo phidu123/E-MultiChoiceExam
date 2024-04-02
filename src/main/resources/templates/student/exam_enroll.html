@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #exam_enroll_layout},
+                                                ~{:: #home-footer}
+                                               )}">
+<head>
+    <meta charset="UTF-8">
+    <title>Enroll</title>
+    <th:block id="home-static-resources">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+    </th:block>
+</head>
+<body>
+<!-- Header -->
+<div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+
+<!-- Navigator -->
+<div id="home-nav" th:replace="~{/fragments/navbar :: nav-student}"></div>
+
+<div th:fragment = "exam_enroll_layout" id = "exam_enroll_layout" class = "container bg-light">
+    <div th:if="${flashMessage}" th:class="${'flash ' + flashType}" id="flashMessage">
+        <div th:class="${'flash__icon ' + flashType}">
+            <i th:if="${flashType == 'failed'}" class="icon fa fa-times-circle-o"></i>
+            <i th:if="${flashType == 'success'}" class="icon fa fa-check"></i>
+        </div>
+        <p th:text="${flashMessage}"></p>
+    </div>
+
+    <form method ="post" th:action="@{/student/exam_enroll}" id="exam_enroll_form" class = "shadow p-3 mb-5 bg-body rounded">
+        <div class="form-group">
+            <label for="token" class ="text-danger"><h3><strong>Token Key</strong></h3></label>
+            <input type="text" class="form-control" id="token" name="token">
+        </div>
+        <div class="form-group d-flex justify-content-end">
+            <button id = "send_token" type="submit" class ="btn btn-success">ENTER EXAM</button>
+        </div>
+    </form>
+</div>
+<!--Footer -->
+<div id="home-footer" th:replace="~{/fragments/app-fragments :: footer}">
+    Footer
+</div>
+
+    
+</body>
+</html>

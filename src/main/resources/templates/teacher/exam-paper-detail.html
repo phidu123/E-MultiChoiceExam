@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--  main-fragment (title, otherStaticResources, header, nav, mainContent, footer)  -->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},
+                                                ~{:: #home-footer}
+                                               )}">
+
+<head>
+    <title>Homepage</title>
+    <th:block id="home-static-resources">
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+        <script type="text/javascript" th:src="@{/javascript/paper.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/paper.css}"/>
+    </th:block>
+</head>
+<body>
+
+<!-- Header -->
+<div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+
+<!-- Navigator -->
+<div id="home-nav" th:replace="~{/fragments/navbar :: nav-teacher}"></div>
+
+<!-- Main content for classes -->
+<div id="home-main-content" class="portlet-box p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form th:if="${test != null}" th:action="@{'/paper/update?id=' + ${test.id}}" method="post" id="survey-form" enctype="multipart/form-data" onsubmit="return confirmUpdate()">
+                    <div class="labels">
+                        <label for="name" id="name-label">Quiz title: *</label>
+                    </div>
+                    <div class="input-tabs">
+                        <input type="text" th:value="${test.title}" th:readonly="${not isAuthor}" name="title" class="input-text" id="name" placeholder="Quiz title" required>
+                    </div>
+
+                    <div class="labels">
+                        <label for="subject" id="name-label">Subject: *</label>
+                    </div>
+                    <div class="input-tabs">
+                        <input readonly type="text" th:value="${subject.name}" class="input-text" required>
+                        <input readonly style="display: none" type="text" name="subject" th:value="${subject.id}" class="input-text" id="subject" required>
+                    </div>
+
+                    <div class="labels">
+                        <label for="dropdown" id="exam-label">Exam category: *</label>
+                    </div>
+                    <div class="input-tabs">
+                        <select name="category" id="dropdown" required th:disabled="${not isAuthor}">
+                            <option disabled value="none">Select an exam category</option>
+                            <th:block th:each="exam : ${category}">
+                                <option th:selected="${test.exam.id == exam.id }" th:value="${exam.id}" th:text="${exam.name}"></option>
+                            </th:block>
+                        </select>
+                    </div>
+
+                    <div class="labels">
+                        <label for="duration" id="duration-label">Duration: *</label>
+                    </div>
+                    <div class="input-tabs">
+                        <input type="number" th:value="${test.duration}" th:readonly="${not isAuthor}" name="duration" class="input-text" id="duration" placeholder="Duration (mins)" required>
+                    </div>
+
+                    <div class="labels">
+                        <label for="time-allowed" id="time-label">Times allowed: *</label>
+                    </div>
+                    <div class="input-tabs">
+                        <input type="number" th:value="${test.timesAllowed}" th:readonly="${not isAuthor}" name="timesAllowed" class="input-text" id="time-allowed" placeholder="Times allowed, e.g: 1, 2" required>
+                    </div>
+
+                    <div class="labels">
+                        <label>Show score? *</label>
+                    </div>
+                    <div class="input-tabs">
+                        <input type="radio" name="showScore" th:disabled="${not isAuthor}" id="show-score-yes" th:checked="${test.showScore == true}" value="true">Yes<br>
+                        <input type="radio" name="showScore" th:disabled="${not isAuthor}" id="show-score-no" th:checked="${test.showScore == false}" value="false">No<br>
+                    </div>
+
+                    <div class="flash failed">
+                        <div class="flash__icon failed">
+                            <i class="icon fa fa-times-circle-o"></i>
+                        </div>
+                        <p class="flash__body">Failure! Times allowed is greater than 1. Choose "No" for Show score.</p>
+                    </div>
+
+                    <div class="labels">
+                        <label>Exam paper content: *</label>
+                    </div>
+
+                    <div class="container">
+                        <div class="file-input-box">
+                            <div class="wrapper-file-input" onclick="openFileInput()">
+                                <div class="input-box">
+                                    <h4>
+                                        <i class="fa fa-upload"></i>
+                                        Choose File to upload
+                                    </h4>
+<!--                                    <input-->
+<!--                                            id="fileInput"-->
+<!--                                            type="file"-->
+<!--                                            hidden-->
+<!--                                            required-->
+<!--                                            accept=".csv"-->
+<!--                                            name="exampaper"-->
+<!--                                            onchange="handleFileChange(event)"-->
+<!--                                    />-->
+                                </div>
+                                <small>CSV support only!</small>
+                            </div>
+
+                            <div class="wrapper-file-section">
+                                <div class="selected-files" id="selectedFiles" v-if="selectedFileNames.length">
+                                    <ul
+                                            class="file-list"
+                                            :style="
+                                selectedFileNames.length ? 'max-height:220px' : 'height:auto'
+                            "
+                                    >
+                                        <li class="item">
+                                            <a class="name" th:href="${'file/' + test.file}" th:text="${test.file}"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="submit">
+                        <button type="submit" id="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--Footer -->
+<div id="home-footer" th:replace="~{/fragments/app-fragments :: footer}">
+    Footer
+</div>
+
+</body>
+</html>

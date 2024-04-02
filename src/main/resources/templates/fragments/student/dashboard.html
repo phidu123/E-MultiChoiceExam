@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div id = "exam_sidebar" class = "text-center">
+        <div class = "row">
+            <div class = "q col-3 border border-1 shadow-sm bg-body rounded" th:each="question, i : ${questions.keySet()}">
+                <div class = "question" th:text="${i.index+1}">1</div>
+                <div class = "text-danger"><b th:id="${'q_'+i.index}"></b></div>
+            </div>
+        </div>
+        <div class = "row">
+            <div class = "container">
+                <div class = "row">
+                    <div class = "timer sub-timer col border border-1 text-center shadow rounded">TIMER</div>
+                </div>
+             </div>
+        </div>
+        <div class = "row">
+            <button id = "submit_form" type ="button" class="btn btn-success shadow rounded">SUBMIT</button>
+        </div>
+    </div>
+</body>
+</html>

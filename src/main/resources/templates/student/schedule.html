@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main-layout}">
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #schedule-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #student_schedule},
+                                                ~{:: #home-footer}
+                                               )}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule</title>
+
+    <th:block id="schedule-static-resources">
+        <link rel="stylesheet" th:href="@{/css/student_schedule.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+    </th:block>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../../static/css/student_schedule.css"> -->
+
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+
+    <!-- Navigator -->
+    <div id="home-nav" th:replace="~{/fragments/navbar :: nav-student}"></div>
+
+    <!--Main Content-->
+    <div th:fragment="student_schedule" class = "container" id = "student_schedule">
+        <div class="row d-flex justify-content-center text-danger" id = "schedule_title"><h1><strong>LỊCH THI CHUNG</strong></h1></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="schedule-table table">
+                    <table class = "shadow p-3 mb-5 bg-body rounded">
+                        <thead>
+                            <tr>
+                                <th>Mon</th>
+                                <th>Tues</th>
+                                <th>Wed</th>
+                                <th>Thur</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                                <th>Sun</th>
+                            </tr>
+                        </thead>
+    
+                        <tbody th:each="exam : ${exams}">
+                        <tr>
+                            <td th:if="${@ExamService.getDayOfWeek(exam)} == 'MONDAY'">
+
+                                <h4 th:text="${exam.name}"></h4>
+                                <p th:text="'AT: ' + ${#temporals.format(exam.examDate, 'HH:mm')}"></p>
+                                <p th:text="${#temporals.format(exam.examDate, 'dd/MM/yyyy')}"></p>
+                            </td>
+                            <td th:unless="${@ExamService.getDayOfWeek(exam)} == 'MONDAY'">
+                                <h4></h4>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                            </td>
+    
+                            <td
+                                th:if="${@ExamService.getDayOfWeek(exam)} == 'TUESDAY'">
+                                <h4 th:text="${exam.name}"></h4>
+                                <p th:text="'AT: ' + ${#temporals.format(exam.examDate, 'HH:mm')}"></p>
+                                <p th:text="${#temporals.format(exam.examDate, 'dd/MM/yyyy')}"></p>
+                            </td>
+                            <td th:unless="${@ExamService.getDayOfWeek(exam)} == 'TUESDAY'">
+                                <h4></h4>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                            </td>
+    
+                            <td th:if="${@ExamService.getDayOfWeek(exam)} == 'WEDNESDAY'">
+                                <h4 th:text="${exam.name}"></h4>
+                                <p th:text="'AT: ' + ${#temporals.format(exam.examDate, 'HH:mm')}"></p>
+                                <p th:text="${#temporals.format(exam.examDate, 'dd/MM/yyyy')}"></p>
+                            </td>
+                            <td th:unless="${@ExamService.getDayOfWeek(exam)} == 'WEDNESDAY'">
+                                <h4></h4>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                            </td>
+    
+                            <td th:if="${@ExamService.getDayOfWeek(exam)} == 'THURSDAY'">
+                                <h4 th:text="${exam.name}"></h4>
+                                <p th:text="'AT: ' + ${#temporals.format(exam.examDate, 'HH:mm')}"></p>
+                                <p th:text="${#temporals.format(exam.examDate, 'dd/MM/yyyy')}"></p>
+
+                            </td>
+                            <td th:unless="${@ExamService.getDayOfWeek(exam)} == 'THURSDAY'">
+                                <h4></h4>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                            </td>
+    
+                            <td th:if="${@ExamService.getDayOfWeek(exam)} == 'FRIDAY'">
+                                <h4 th:text="${exam.name}"></h4>
+                                <p th:text="'AT: ' + ${#temporals.format(exam.examDate, 'HH:mm')}"></p>
+                                <p th:text="${#temporals.format(exam.examDate, 'dd/MM/yyyy')}"></p>
+                            </td>
+                            <td th:unless="${@ExamService.getDayOfWeek(exam)} == 'FRIDAY'">
+                                <h4></h4>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                            </td>
+    
+                            <td th:if="${@ExamService.getDayOfWeek(exam)} == 'SATURDAY'">
+                                <h4 th:text="${exam.name}"></h4>
+                                <p th:text="'AT: ' + ${#temporals.format(exam.examDate, 'HH:mm')}"></p>
+                                <p th:text="${#temporals.format(exam.examDate, 'dd/MM/yyyy')}"></p>
+                            </td>
+                            <td th:unless="${@ExamService.getDayOfWeek(exam)} == 'SATURDAY'">
+                                <h4></h4>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                            </td>
+
+                            <td th:if="${@ExamService.getDayOfWeek(exam)} == 'SUNDAY'">
+                                <h4 th:text="${exam.name}"></h4>
+                                <p th:text="'AT: ' + ${#temporals.format(exam.examDate, 'HH:mm')}"></p>
+                                <p th:text="${#temporals.format(exam.examDate, 'dd/MM/yyyy')}"></p>
+                            </td>
+                            <td th:unless="${@ExamService.getDayOfWeek(exam)} == 'SUNDAY'">
+                                <h4></h4>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer -->
+    <div id="home-footer" th:replace="~{/fragments/app-fragments :: footer}">
+        Footer
+    </div>
+</body>
+</html>

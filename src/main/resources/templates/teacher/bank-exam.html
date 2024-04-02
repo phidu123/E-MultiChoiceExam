@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--  main-fragment (title, otherStaticResources, header, nav, mainContent, footer)  -->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},
+                                                ~{:: #home-footer}
+                                               )}">
+
+<head>
+    <title>Bank Resource</title>
+    <th:block id="home-static-resources">
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+        <script type="text/javascript" th:src="@{/javascript/bank.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/bank.css}"/>
+    </th:block>
+</head>
+<body>
+
+<!-- Header -->
+<div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+
+<!-- Navigator -->
+<div id="home-nav" th:replace="~{/fragments/navbar :: nav-teacher}"></div>
+
+<!-- Main content for classes -->
+<div id="home-main-content" class="portlet-box p-3">
+    <div class="container">
+        <div th:if="${subjects != null and subjects.size() > 0}" class="row">
+            <div th:each="subject, index : ${subjects}" class="col-4">
+                <a th:href="@{'/bank/exam?s=' + ${subject.id}}" class="inactive-link zoom d-block subject">
+                    <img th:src="@{/images/quiz-package.png}" class="subject-banner"/>
+                    <div class="px-2 py-1">
+                        <h6 class="subject-name pt-2" th:text="${subject.name}"></h6>
+                        <hr />
+                        <p class="exam-num" th:text="${quantity[index.index]} + ' exam(s) available'"></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row" th:if="${isExam == true}">
+            <div class="col-12">
+                <div class="d-flex justify-content-between">
+                    <span class="hi" th:text="${quantity} + ' exam(s)'"></span>
+                    <a th:href="@{/paper/add/{subjectId}(subjectId=${subject})}" class="btn add-exam">Add new exam</a>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div th:if="${tests != null and quantity > 0}" class="row">
+            <div th:if="${flashMessage}" th:class="${'flash ' + flashType}" id="flashMessage">
+                <div th:class="${'flash__icon ' + flashType}">
+                    <i th:if="${flashType == 'failed'}" class="icon fa fa-times-circle-o"></i>
+                    <i th:if="${flashType == 'success'}" class="icon fa fa-check"></i>
+                </div>
+                <p th:text="${flashMessage}"></p>
+            </div>
+            <form class="col-12">
+                <table class="w-100">
+                    <thead>
+                    <tr class="filters">
+                        <th>Title
+                            <input id="title-search" name="title-search" class="form-control">
+                        </th>
+                        <th>Author
+                            <select id="author-filter" name="author-filter" class="form-control">
+                                <option value="*">Any</option>
+<!--                                <th:block th:each="teacher : ${teachers}">-->
+<!--                                    <option th:value="${teacher.id}" th:text="${teacher.name}"></option>-->
+<!--                                </th:block>-->
+                                <th:block th:each="teacher : ${uniqueTeachers}">
+                                    <option th:value="${teacher.id}" th:text="${teacher.name}"></option>
+                                </th:block>
+                            </select>
+                        </th>
+                        <th>Exam
+                            <select id="exam-filter" name="exam-filter" class="form-control">
+                                <option value="*">Any</option>
+                                <th:block th:each="exam : ${uniqueExams}">
+                                    <option th:value="${exam.id}" th:text="${exam.name}"></option>
+                                </th:block>
+                            </select>
+                        </th>
+                        <th>Sort by
+                            <select id="sort-filter" name="sort-filter" class="form-control">
+                                <option value="none">None</option>
+                                <option value="author-asc">Author (asc)</option>
+                                <option value="author-desc">Author (desc)</option>
+                                <option value="created-asc">Date created (asc)</option>
+                                <option value="created-desc">Date created (desc)</option>
+                                <option value="modified-asc">Last modified (asc)</option>
+                                <option value="modified-desc">Last modified (desc)</option>
+                            </select>
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+            </form>
+        </div>
+        <hr th:if="${tests != null and quantity > 0}" style="border-top: 3px solid #ddd;">
+        <div th:if="${tests != null and quantity > 0}" class="row" style="margin-top: -25px">
+            <table class="col-12 content-table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Date created</th>
+                        <th>Last modified</th>
+                        <th>Exam</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                    <tr th:each="test, index : ${tests}">
+                        <td style="text-align: center" th:text="${index.index + 1}"></td>
+                        <td th:text="${test.title}"></td>
+                        <td th:author="${teachers[index.index].id}" th:text="${teachers[index.index].name}"></td>
+                        <td th:text="${#temporals.format(test.dateCreated, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                        <td th:text="${#temporals.format(test.lastModified, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                        <td th:exam="${exams[index.index].id}" th:text="${exams[index.index].name}"></td>
+                        <td class="actions">
+                            <a th:href="@{/paper/detail(id=${test.id})}" class="btn btn-warning"><i class="fa fas fa-edit"></i></a>
+                            <form method="post" th:action="@{'/paper/delete?id=' + ${test.id}}" onsubmit="return confirmDelete()" style="display: inline">
+                                <input type="hidden" name="subject" th:value="${subject}">
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Display pagination controls -->
+            <div class="pagination">
+                <a class="arrow" id="prevPage" th:class="${currentPage == 0} ? 'disabled' : ''"
+                   th:href="@{/bank/exam?s={s}(s=${subject}, page=${currentPage - 1}, size=${size})}">
+                    ← <span class="nav-text">PREV</span>
+                </a>
+                <div class="pages" th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}">
+                        <a th:if="${currentPage != pageNumber}"
+                           th:href="@{/bank/exam?s={s}(s=${subject}, page=${pageNumber}, size=${size})}"
+                           th:text="${pageNumber + 1}"
+                           th:class="${currentPage == pageNumber} ? 'page-number active' : 'page-number'"></a>
+                        <span th:if="${currentPage == pageNumber}"
+                           th:text="${pageNumber + 1}"
+                           th:class="${currentPage == pageNumber} ? 'page-number active' : 'page-number'"></span>
+                </div>
+                <a class="arrow" id="nextPage" th:class="${currentPage == totalPages - 1 || quantity < size} ? 'disabled' : ''"
+                   th:href="@{/bank/exam?s={s}(s=${subject}, page=${currentPage + 1}, size=${size})}">
+                    <span class="nav-text">NEXT</span> →
+                </a>
+            </div>
+        </div>
+        <div th:if="${errMsg != null}">
+            <p style="font-size: 20px; font-style: italic" th:text="${errMsg}"></p>
+        </div>
+    </div>
+
+</div>
+
+<!--Footer -->
+<div id="home-footer" th:replace="~{/fragments/app-fragments :: footer}">
+    Footer
+</div>
+
+</body>
+</html>

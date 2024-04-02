@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--  main-fragment (title, otherStaticResources, header, nav, mainContent, footer)  -->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},
+                                                ~{:: #home-footer}
+                                               )}">
+
+<head>
+    <title>Statistic</title>
+    <th:block id="home-static-resources">
+        <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />
+        <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
+        <script src="https://cdn.syncfusion.com/ej2-charts/dist/ej2-charts.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"></script>
+
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+        <script type="text/javascript" th:src="@{/javascript/statistic.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+    </th:block>
+</head>
+<body>
+
+<!-- Header -->
+<div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+
+<!-- Navigator -->
+<div id="home-nav" th:replace="~{/fragments/navbar :: nav-teacher}"></div>
+
+<!-- Main content for classes -->
+<div id="home-main-content" class="portlet-box p-3">
+    <div class="container">
+        <div th:if="${subjects != null and subjects.size() > 0}" class="row">
+            <div th:if="${subjects != null}" class="col-12">
+                <table class="w-100">
+                    <thead>
+                    <tr class="filters">
+                        <th class="px-3">Subject
+                            <select id="subject-filter" name="author-filter" class="form-control">
+                                <option value="*">Any</option>
+                                <th:block th:each="subject : ${subjects}">
+                                    <option th:value="${subject.id}" th:text="${subject.name}"></option>
+                                </th:block>
+                            </select>
+                        </th>
+                        <th class="px-3">Exam
+                            <select id="exam-filter" name="exam-filter" class="form-control">
+                                <option value="*">Any</option>
+                                <th:block th:each="exam : ${exams}">
+                                    <option th:value="${exam.id}" th:text="${exam.name}"></option>
+                                </th:block>
+                            </select>
+                        </th>
+                        <th class="d-flex justify-content-center align-item-center pt-3">
+                            <button
+                                    class="btn my-2"
+                                    style="
+                                        background: var(--main-bg-color);
+                                        color: #fff;
+                                    "
+                                    type="button"
+                                    th:onclick="'viewStatistic(\'' + ${teacher} + '\')'"
+                            >View statistic</button>
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-12" id="statistic">
+                <ul id="stat-desc">
+                </ul>
+                <div style="min-height: 300px" class="col-12 d-flex my-2 mx-auto d-flex justify-content-center">
+                    <div id="histogram" class="col-7 px-1">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--Footer -->
+<div id="home-footer" th:replace="~{/fragments/app-fragments :: footer}">
+    Footer
+</div>
+
+</body>
+</html>

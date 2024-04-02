@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      th:replace="~{/layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},
+                                                ~{:: #home-footer}
+                                               )}">
+<head>
+    <title>PLANS EXAM</title>
+    <th:block id="home-static-resources">
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/list-student.css}"/>
+    </th:block>
+</head>
+<body>
+<div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+<div id="home-nav" th:replace="~{/fragments/navbar :: nav-admin}"></div>
+<div id="home-main-content" class="portlet-box p-3">
+    <div class="table-responsive">
+        <h2 class="text-center mt-4">EXAM PLANS</h2>
+
+        <a th:href="@{/admin/add-plan}"><button class="btn btn-danger" style="float: right;">Add Plan Exam</button></a><br><br>
+
+        <table class="table" id="plans">
+            <th class="student-header-table pt-2">ID</th>
+            <th class="student-header-table pt-2">Name</th>
+            <th class="student-header-table pt-2">Date</th>
+            <th class="student-header-table pt-2">Action</th>
+
+            <tr th:each="p, start : ${plans}">
+                <td class="student-header-table pt-2" th:text="${start.index + 1}"></td>
+                <td class="student-id pt-2" th:text="${p.name}"></td>
+                <td class="student-id pt-2" th:text="${p.examDate}"></td>
+                <td class="student-id pt-2">
+                    <a th:href="@{/admin/update-plan/{id} (id=${p.id})}">
+                        <button class="btn btn-info">Edit</button>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div id="home-footer" th:replace="~{/fragments/app-fragments :: footer}">
+    Footer
+</div>
+</body>
+</html>

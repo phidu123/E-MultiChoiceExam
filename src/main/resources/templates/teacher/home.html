@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<div>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/profile.css}"/>
+    <div>
+        <span id="semester">hi</span>
+    </div>
+    <div class="text-center">
+        <img width="200px" style="border-radius: 50%" class="img-fluid img-circle" src="/resources/default-avatar.jpg">
+        <h3 style="color: var(--main-bg-color)" th:text="${name}" class="pt-3 text-bold"></h3>
+    </div>
+
+<!--    Information card-->
+
+    <div class="section section-tabs">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+
+                    <div id="nav-tabs">
+                        <!-- Tabs with icons on Card -->
+                        <div class="card card-nav-tabs w-100">
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a onclick="renderTab(event, this)" href="#about" class="py-2 px-3 mr-5" data-toggle="tab">
+                                        <i class='font-style fas fa-grin-alt'></i>
+                                        About
+                                    </a>
+                                </li>
+                                <li >
+                                    <a onclick="renderTab(event, this)" class="py-2 px-3 mr-5" href="#contact" data-toggle="tab">
+                                        <i class="font-style fa fa-address-book" aria-hidden="true"></i>
+                                        Contact
+                                    </a>
+                                </li>
+                                <li >
+                                    <a onclick="renderTab(event, this)" class="py-2 px-3 mr-5" href="#academic" data-toggle="tab">
+                                        <i class="font-style fa-solid fa-book"></i>
+                                        Academic
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="about">
+                                    <table class="table" width="80px" align="center">
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-right">Full Name:</td>
+                                            <td style="text-align:left;"><b th:text="${name}"></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">Date of Birth:</td>
+                                            <td style="text-align:left;"><b th:text="${dob}"></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">Address:</td>
+                                            <td style="text-align:left;"><b th:text="${address}"></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">Phone:</td>
+                                            <td style="text-align:left;"><b th:text="${phone}"></b></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane" id="contact">
+                                    <table class="table" width="80px" align="center">
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-right">Email:</td>
+                                            <td style="text-align:left;"><b th:text="${email}"></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">Phone:</td>
+                                            <td style="text-align:left;"><b th:text="${phone}"></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">Faculty:</td>
+                                            <td style="text-align:left;"><b th:text="${faculty}"></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">Workplace:</td>
+                                            <td style="text-align:left;"><b th:text="${workplace}"></b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">Position:</td>
+                                            <td style="text-align:left;"><b th:text="${position}"></b>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane" id="academic">
+                                    <table class="table" width="80px" align="center">
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-right">Degree:</td>
+                                            <td style="text-align:left;"><b th:text="${degree}"></b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">Educational Background:</td>
+                                            <td style="text-align:left;">
+                                                <ul th:each="eduItem : ${eduBg}">
+                                                    <li><b th:text="${eduItem}"></b></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">Research of interest:</td>
+                                            <td style="text-align:left;"><b th:text="${research}"></b></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      th:replace="~{/layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},
+                                                ~{:: #home-footer}
+                                               )}">
+<head>
+    <title>EDIT USER</title>
+    <th:block id="home-static-resources">
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/paper.css}"/>
+    </th:block>
+</head>
+<body>
+<div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+<div id="home-nav" th:replace="~{/fragments/navbar :: nav-admin}"></div>
+
+<div id="home-main-content"  class="portlet-box p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center mt-4">Edit User</h2>
+                <form th:action="@{/admin/update-user-status/} + ${account.id}" method="post" th:object="${account}" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="text" class="form-control" id="email" aria-describedby="emailHelp" name="email" required th:value="${account.email}">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" aria-describedby="emailHelp" name="password" required th:value="${account.password}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" name="name" required th:value="${account.name}">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" class="form-control" id="address" aria-describedby="emailHelp" name="address" required th:value="${account.address}">
+                    </div>
+                    <div class="form-group">
+                        <label for="workplace">Workplace:</label>
+                        <input type="text" class="form-control" id="workplace" aria-describedby="emailHelp" name="workplace" required th:value="${account.workplace}">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input type="tel" class="form-control" id="phone" aria-describedby="emailHelp" name="phone" required th:value="${account.phone}">
+                    </div>
+                    <div class="form-group">
+                        <label for="birth">Date of Birth:</label>
+                        <input type="date" class="form-control" id="birth" aria-describedby="emailHelp" name="birth" required th:value="${account.DoB}">
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Avatar:</label>
+                        <input type="file" class="form-control-file"  onchange="readURL(this);" id="image" name="image" accept="image/png, image/jpeg" required>
+                        <img id="blah" th:src="${account.avatar}" alt="your image" />
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role:</label>
+                        <select class="form-control" id="role" name="role" required>
+                            <span th:if="${account.role}=='teacher'">
+                              <option  value="teacher" selected>Teacher</option>
+                              <option value="student">Student</option>
+                            </span>
+                            <span th:if="${account.role}=='student'">
+                              <option  value="student" selected>Student</option>
+                              <option value="teacher">Teacher</option>
+                            </span>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="active">Role:</label>
+                        <select class="form-control" id="active" name="active" required>
+                            <span th:if="${account.isActive}==true">
+                              <option  value="true" selected>Active</option>
+                              <option value="false">Inactive</option>
+                            </span>
+                            <span th:if="${account.isActive}==false">
+                              <option  value="true">Active</option>
+                              <option value="false" selected>Inactive</option>
+                            </span>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="home-footer" th:replace="~{/fragments/app-fragments :: footer}">
+    Footer
+</div>
+<script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('#blah').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+</script>
+</body>
+</html>

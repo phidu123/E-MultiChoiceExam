@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!--  main-fragment (title, otherStaticResources, header, nav, mainContent, footer)  -->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},
+                                                ~{:: #home-footer}
+                                               )}">
+
+<head>
+    <title>Homepage</title>
+    <th:block id="home-static-resources">
+        <script type="text/javascript" th:src="@{/javascript/home.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/list-student.css}"/>
+    </th:block>
+</head>
+<body class="body-list-student">
+
+<!-- Header -->
+<div id="home-header" th:replace="~{/fragments/app-fragments :: header}"></div>
+
+<!-- Navigator -->
+<div id="home-nav" th:replace="~{/fragments/navbar :: nav-teacher}"></div>
+
+<!-- Main content for classes -->
+<div id="home-main-content" class="portlet-box p-3">
+    <h2 class="text-center mt-4">Danh sách sinh viên</h2>
+
+    <table class="student-table">
+        <tr>
+            <th class="student-header-table pt-2">Mã số sinh viên</th>
+            <th class="student-header-table pt-2">Họ và tên</th>
+            <th class="student-header-table pt-2">Action</th>
+        </tr>
+        <tr>
+            <td class="student-id pt-2">52100995</td>
+            <td class="student-name pt-2">Nguyễn Thành Quí</td>
+            <td class="student-action pt-2">
+                <button class="student-action-button pt-2">
+                    Cấm thi
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="student-id pt-2">52100995</td>
+            <td class="student-name pt-2">Nguyễn Thành Quí</td>
+            <td class="student-action pt-2">
+                <button class="student-action-button pt-2">
+                    Cấm thi
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="student-id pt-2">52100995</td>
+            <td class="student-name pt-2">Nguyễn Thành Quí</td>
+            <td class="student-action pt-2">
+                <button class="student-action-button pt-2">
+                    Cấm thi
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="student-id pt-2">52100995</td>
+            <td class="student-name pt-2">Nguyễn Thành Quí</td>
+            <td class="student-action pt-2">
+                <button class="student-action-button pt-2">
+                    Cấm thi
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="student-id pt-2">52100995</td>
+            <td class="student-name pt-2">Nguyễn Thành Quí</td>
+            <td class="student-action pt-2">
+                <button class="student-action-button pt-2">
+                    Cấm thi
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="student-id pt-2">52100995</td>
+            <td class="student-name pt-2">Nguyễn Thành Quí</td>
+            <td class="student-action pt-2">
+                <button class="student-action-button pt-2">
+                    Cấm thi
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="student-id pt-2">52100995</td>
+            <td class="student-name pt-2">Nguyễn Thành Quí</td>
+            <td class="student-action pt-2">
+                <button class="student-action-button pt-2">
+                    Cấm thi
+                </button>
+            </td>
+        </tr>
+    </table>
+    <button class="save-button pt-2">Lưu file</button>
+</div>
+<script>
+// <!--    var students = [-->
+// <!--        { id: "001", name: "Nguyễn Văn A", absent: 2 },-->
+// <!--        { id: "002", name: "Trần Thị B", absent: 1 },-->
+// <!--        { id: "003", name: "Phạm Văn C", absent: 3 },-->
+// <!--        { id: "004", name: "Lê Thị D", absent: 0 },-->
+// <!--        { id: "005", name: "Hoàng Văn E", absent: 2 },-->
+// <!--        { id: "006", name: "Nguyễn Thị F", absent: 1 },-->
+// <!--        { id: "007", name: "Trần Văn G", absent: 1 },-->
+// <!--        { id: "008", name: "Lê Thị H", absent: 0 },-->
+// <!--        { id: "009", name: "Nguyễn Văn I", absent: 2 }-->
+// <!--    ];-->
+//
+// <!--    var studentsList = document.getElementById("studentsList");-->
+//
+// <!--    for (var i = 0; i < students.length; i++) {-->
+// <!--        var student = students[i];-->
+// <!--        var studentCard = createStudentCard(student);-->
+// <!--        studentsList.appendChild(studentCard);-->
+// <!--    }-->
+//
+// <!--    function createStudentCard(student) {-->
+// <!--        var card = document.createElement("div");-->
+// <!--        card.className = "col-md-4 mb-4";-->
+//
+// <!--        var studentId = document.createElement("h4");-->
+// <!--        studentId.innerText = "Mã số sinh viên: " + student.id;-->
+//
+// <!--        var studentName = document.createElement("h4");-->
+// <!--        studentName.innerText = "Tên: " + student.name;-->
+//
+// <!--        var studentAbsent = document.createElement("h4");-->
+// <!--        studentAbsent.innerText = "Số buổi vắng: " + student.absent;-->
+//
+// <!--        var notEligibleButton = document.createElement("button");-->
+// <!--        notEligibleButton.innerText = "Không đủ điều kiện dự thi";-->
+// <!--        notEligibleButton.className = "btn btn-primary";-->
+// <!--        notEligibleButton.addEventListener("click", function() {-->
+// <!--            notEligibleButton.disabled = true;-->
+// <!--            notEligibleButton.classList.remove("btn-primary");-->
+// <!--            notEligibleButton.classList.add("btn-secondary");-->
+// <!--        });-->
+//
+// <!--        card.appendChild(studentId);-->
+// <!--        card.appendChild(studentName);-->
+// <!--        card.appendChild(studentAbsent);-->
+// <!--        card.appendChild(notEligibleButton);-->
+//
+// <!--        return card;-->
+// <!--    }-->
+</script>
+
+<!--Footer -->
+<div id="home-footer" th:replace="~{/fragments/app-fragments :: footer}">
+    Footer
+</div>
+</body>
+</html>
